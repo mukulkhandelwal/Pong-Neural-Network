@@ -48,8 +48,33 @@ def drawPaddle2(paddle2YPos):
 	pygame.draw.rect(screen, WHITE, paddle2)
 
 
+def upadateBall(paddle1YPos, paddle2YPos, ballXpos, ballYPos, ballXDirection,ballYDirection):
+
+	#update c and y position
+	ballXPos = ballXPos + ballXDirection * BALL_X_SPEED
+	ballYPos = ballYPos + ballYDirection * BALL_Y_SPEED
+
+	score = 0
+
+	#check for a collision, if the ball
+	#hits the left side
+	#then switch direction
+	if(ballXPos <= PADDLE_BUFFER + PADDLE_WIDTH and ballYPos + BALL_HEIGHT >= paddle1YPos and ballYPos - BALL_HEIGHT <= paddle1YPos + PADDLE_HEIGHT):	
+		ballXDirection = 1
+
+	elif (ballXPos <=0)
+		ballXDirection = 1
+		score =-1
+ 		return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
 
 
-
+ 		if( ballXPos >= WINDOW_WIDTH - PADDLE_WIDTH - PADDLE_BUFFER and ballYPos + BALL_HEIGHT >= paddle2YPos and ballYPos - BALL_HEIGHT <= paddle2YPos + PADDLE_HEIGHT):
+			 ballXDirection = -1
+    	#past it
+    	elif (ballXPos >= WINDOW_WIDTH - BALL_WIDTH):
+        #positive score
+        	ballXDirection = -1
+        	score = 1
+        	return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
 
 
