@@ -138,7 +138,7 @@ def updatePaddle2(action, ballYPos):
 class PongGame:
 	def __init__(self):
 		#random no for initial direction of ball
-		num - random.randInr(0,9)
+		num = random.randint(0,9)
 
 		#keep score
 		self.tally = 0
@@ -154,6 +154,20 @@ class PongGame:
 		#starting point
 		self.ballXPos = WINDOW_HEIGHT/2 -BALL_WIDTH/2
 
+		#randomly decide where the ball will move
+
+		if(0 < num < 3):
+			self.ballXDirection = 1
+			self.ballYDirection = 1
+		if(3<= num < 5):
+			self.ballXDirection = -1
+			self.ballYDirection 1
+		if(5 <= num < 8):
+			self.ballXDirection = 1
+			self.ballYDirection =-1
+		if(8 <= num < 10):
+			self.ballXDirection = -1
+			self.ballYDirection = -1
 
 	def getPresentFrame(self):
 
@@ -192,7 +206,7 @@ class PongGame:
 		drawPaddle2(self.paddle2YPos)
 		
 		[score, self.paddle1YPos, self.paddle2YPos, self.ballXPos, self.ballYPos, self.ballXDirection, self.ballYDirection] = updateBall(self.paddle1YPos, self.paddle2YPos, self.ballXPos, self.ballYPos, self.ballXDirection, self.ballYDirection)
-		
+
 		image_data = pygame.surfarray.array3d(pygame.display.get_surface())
 
 		pygame.display.flip()
