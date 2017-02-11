@@ -114,25 +114,25 @@ def updatePaddle1(action, paddle1YPos):
 	return paddle1YPos
 
 
-def updatePaddle2(action, ballYPos):
-	#if move up
-
-	if(action[1] = 1):
-		paddle2YPos = paddle2YPos - PADDLE_SPEED
-
+def updatePaddle2(paddle2YPos, ballYPos):
 	#if move down
-	if(action[2] == 1)
-		paddle1YPos = paddle1YPos + PADDLE_SPEED
+
+	if(paddle2YPos + PADDLE_HEIGHT/2 < ballYPos + BALL_HEIGHT/2):
+		paddle2YPos = paddle2YPos + PADDLE_SPEED
+
+	#if move up
+	if(paddle2YPos + PADDLE_HEIGHT/2 > ballYPos + BALL_HEIGHT/2):
+		paddle1YPos = paddle1YPos - PADDLE_SPEED
 
 
 	#dont lete it move off the screen!
 
-	if(paddle1YPos < 0):
-		paddle1YPos = 0
-	if(paddle1YPos > WINDOW_HEIGHT - PADDLE_HEIGHT):
-		paddle1YPos = WINDOW_HEIGHT - PADDLE_HEIGHT
+	if(paddle2YPos < 0):
+		paddle2YPos = 0
+	if(paddle2YPos > WINDOW_HEIGHT - PADDLE_HEIGHT):
+		paddle2YPos = WINDOW_HEIGHT - PADDLE_HEIGHT
 
-	return paddle1YPos
+	return paddle2YPos
 
 
 class PongGame:
