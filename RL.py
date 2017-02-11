@@ -1,6 +1,6 @@
 #convulational neural network
 
-import tensorflow as tensorflow
+import tensorflow as tf
 import cv2  #open CV
 import pong
 import numpy as np
@@ -35,7 +35,7 @@ def createGraph():
 
 	#first convulational layer , bias vector
 	W_conv1 = tf.Variable(tf.zeros([8, 8, 4, 32])) 
-	b_conv1 = tf.Variable(tf.zeros[32])
+	b_conv1 = tf.Variable(tf.zeros([32]))
 
 
 	#second layer
@@ -51,27 +51,27 @@ def createGraph():
 	b_fc4 = tf.Variable(tf.zeros([784]))
 
 	#last layer
-	w_fc5 = tf.Variable(tf.zeros([784, ACTIONS]))
+	W_fc5 = tf.Variable(tf.zeros([784, ACTIONS]))
 	b_fc5 = tf.Variable(tf.zeros([ACTIONS]))
 
 
 
 	#input for piezl data
-	s = tf.placeholder("float", [None, 84, 84, 84])
+	s = tf.placeholder("float", [None, 84, 84, 4])
 
 	#compute RELU,activation fuction
 	#on 2d convulation
 	#given 4D inputs and filter tensor
 
 	conv1 = tf.nn.relu(tf.nn.conv2d(s, W_conv1, strides = [1, 4, 4, 1] ,padding = "VALID") + b_conv1)
-	conv2 = tf.nn.relu(tf.nn.conv2d(s, W_conv2, strides = [1, 4, 4, 1] ,padding = "VALID") + b_conv2)
+	conv2 = tf.nn.relu(tf.nn.conv2d(conv1, W_conv2, strides = [1, 2, 2, 1] ,padding = "VALID") + b_conv2)
 	
-	conv3 = tf.nn.relu(tf.nn.conv2d(s, W_conv3, strides = [1, 4, 4, 1] ,padding = "VALID") + b_conv3)
+	conv3 = tf.nn.relu(tf.nn.conv2d(conv2, W_conv3, strides = [1, 1, 1, 1] ,padding = "VALID") + b_conv3)
 
 	conv3_flat = tf.reshape(conv3, [-1,3136])
-	fc4 = tf.nn.relu(tf.matmul(conv3_flat, W_fc4 + b_fc4))
+	fc4 = tf.nn.relu(tf.matmul(conv3_flat, W_fc4) + b_fc4)
 
-	fc5 = tf.matmul(fc5, w_fc5) + b_fc5
+	fc5 = tf.matmul(fc4, W_fc5) + b_fc5
 
 	return s, fc5
 

@@ -13,6 +13,7 @@ WINDOW_HEIGHT = 400
 PADDLE_WIDTH = 10
 PADDLE_HEIGHT = 60
 
+PADDLE_BUFFER = 10
 #size of our ball
 BALL_WIDTH = 10
 BALL_HEIGHT = 10
@@ -27,7 +28,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0) #background
 
 #initialize our screen
-screen = pygame.display.set_Node(WINDOW_WIDTH,WINDOW_HEIGHT)
+screen = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
 
 
 
@@ -67,36 +68,40 @@ def upadateBall(paddle1YPos, paddle2YPos, ballXpos, ballYPos, ballXDirection,bal
 	elif (ballXPos <=0):
 		ballXDirection = 1
 		score =-1
- 		return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
+ 	return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
 
 
- 	if( ballXPos >= WINDOW_WIDTH - PADDLE_WIDTH - PADDLE_BUFFER 
+ 	if(ballXPos >= WINDOW_WIDTH - PADDLE_WIDTH - PADDLE_BUFFER 
  		and ballYPos + BALL_HEIGHT >= paddle2YPos
  		 and ballYPos - BALL_HEIGHT <= paddle2YPos + PADDLE_HEIGHT):
-			 ballXDirection = -1
+			 
+			ballXDirection = -1
     	#past it
-    elif (ballXPos >= WINDOW_WIDTH - BALL_WIDTH):
-        #positive score
-        ballXDirection = -1
-        score = 1
-        return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
+    	elif(ballXPos >= WINDOW_WIDTH - BALL_WIDTH):
+        	#positive score
+        	ballXDirection = -1
+        	score = 1
+	    	return [score, paddle1YPos, paddle2YPos, ballXPos, ballYPos, ballXDirection, ballYDirection]
 
 
-    if(ballYPos <= 0):
-    	ballYPos = 0
-    	ballYDirection = 1
-    elif(ballYPos >= WINDOW_HEIGHT - BALL_HEIGHT):
-    	ballYPos = WINDOW_HEIGHT - BALL_HEIGHT
-    	ballYDirection = -1
+    
+
+    	if(ballYPos <= 0):
+    		ballYPos = 0
+    		ballYDirection = 1
+
+    	elif(ballYPos >= WINDOW_HEIGHT - BALL_HEIGHT ):
+    		ballYPos = WINDOW_HEIGHT - BALL_HEIGHT
+    		ballYDirection = -1
 
 	return [score, paddle1YPos, paddle2YPos,
-	 ballXPos, ballYPos, ballXDirection, ballYDirection]
+		ballXPos, ballYPos, ballXDirection, ballYDirection]
 
 
 def updatePaddle1(action, paddle1YPos):
 	#if move up
 
-	if(action[1] = 1):
+	if(action[1] == 1):
 		paddle1YPos = paddle1YPos - PADDLE_SPEED
 
 	#if move down
@@ -161,7 +166,7 @@ class PongGame:
 			self.ballYDirection = 1
 		if(3<= num < 5):
 			self.ballXDirection = -1
-			self.ballYDirection 1
+			self.ballYDirection = 1
 		if(5 <= num < 8):
 			self.ballXDirection = 1
 			self.ballYDirection =-1
@@ -172,7 +177,7 @@ class PongGame:
 	def getPresentFrame(self):
 
 		#for each frame call the event queue
-		pygame.event,pump()
+		pygame.event.pump()
 
 		#make background black
 
