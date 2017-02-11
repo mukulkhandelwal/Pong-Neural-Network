@@ -86,7 +86,7 @@ def upadateBall(paddle1YPos, paddle2YPos, ballXpos, ballYPos, ballXDirection,bal
     	ballYPos = 0
     	ballYDirection = 1
     elif(ballYPos >= WINDOW_HEIGHT - BALL_HEIGHT):
-    		ballYPos = WINDOW_HEIGHT - BALL_HEIGHT
+    	ballYPos = WINDOW_HEIGHT - BALL_HEIGHT
     	ballYDirection = -1
 
 	return [score, paddle1YPos, paddle2YPos,
@@ -100,7 +100,7 @@ def updatePaddle1(action, paddle1YPos):
 		paddle1YPos = paddle1YPos - PADDLE_SPEED
 
 	#if move down
-	if(action[2] == 1)
+	if(action[2] == 1):
 		paddle1YPos = paddle1YPos + PADDLE_SPEED
 
 
