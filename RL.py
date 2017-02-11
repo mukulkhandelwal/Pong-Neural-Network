@@ -47,7 +47,7 @@ def createGraph():
 	b_conv3 = tf.Variable(tf.zeros([64]))
 
 	#fourth
-	W_fc4 = tf.Variable(tf.zeros([784, ACTIONS]))
+	W_fc4 = tf.Variable(tf.zeros([3136, 784]))
 	b_fc4 = tf.Variable(tf.zeros([784]))
 
 	#last layer
@@ -63,10 +63,10 @@ def createGraph():
 	#on 2d convulation
 	#given 4D inputs and filter tensor
 
-	conv1 = tf.nn.relu(tf.nn.conv2d(s, W_conv1, strides = [1, 4, 4, 1] ,padding = "VALID") + b_conv1)
-	conv2 = tf.nn.relu(tf.nn.conv2d(conv1, W_conv2, strides = [1, 2, 2, 1] ,padding = "VALID") + b_conv2)
+	conv1 = tf.nn.relu(tf.nn.conv2d(s, W_conv1, strides = [1, 4, 4, 1] , padding = "VALID") + b_conv1)
+	conv2 = tf.nn.relu(tf.nn.conv2d(conv1, W_conv2, strides = [1, 2, 2, 1] , padding = "VALID") + b_conv2)
 	
-	conv3 = tf.nn.relu(tf.nn.conv2d(conv2, W_conv3, strides = [1, 1, 1, 1] ,padding = "VALID") + b_conv3)
+	conv3 = tf.nn.relu(tf.nn.conv2d(conv2, W_conv3, strides = [1, 1, 1, 1] , padding = "VALID") + b_conv3)
 
 	conv3_flat = tf.reshape(conv3, [-1,3136])
 	fc4 = tf.nn.relu(tf.matmul(conv3_flat, W_fc4) + b_fc4)
