@@ -183,15 +183,22 @@ class PongGame:
 	def getNextFrame(self, action):
 
 		pygame.event.pump()
+		score=0
 		screen.fill(BLACK)
 		self.paddle1YPos = updatePaddle1(action, self.paddle1YPos)
 		drawPaddle1(self.paddle1YPos)
+		
 		self.paddle2YPos = updatePaddle2(self.paddle2YPos,self.ballYPos)
-		drawPaddle2(self.ballXPos,self.ballYPos)
+		drawPaddle2(self.paddle2YPos)
+		
+		[score, self.paddle1YPos, self.paddle2YPos, self.ballXPos, self.ballYPos, self.ballXDirection, self.ballYDirection] = updateBall(self.paddle1YPos, self.paddle2YPos, self.ballXPos, self.ballYPos, self.ballXDirection, self.ballYDirection)
 		
 		image_data = pygame.surfarray.array3d(pygame.display.get_surface())
 
 		pygame.display.flip()
 		self.tally=self.tally + score
-		return [score , image_data]		
+		print("Tally is " + str(self.tally))
+		return [score , image_data]	
+
+
 
